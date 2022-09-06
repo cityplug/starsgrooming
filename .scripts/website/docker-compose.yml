@@ -28,7 +28,17 @@ services:
         environment:
             WORDPRESS_DB_HOST: db:3306
             WORDPRESS_DB_USER: wordpress
-            WOEDPRESS_PASSWORD: T0day.T1jan333
+            WORDPRESS_PASSWORD: T0day.T1jan333
+            WORDPRESS_DB_NAME: wordpress
+    nginx:
+        build: ./nginx
+        container_name: nginx
+        ports:
+            - "80:80"
+        networks:
+            website_network:
+                aliases:
+                    - nginx-proxy           
 networks:
     website_network:
         name: website_network
