@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+    db:
+        build: ./db
+        container_name: db
+        ports:
+          - "3306:3306"
+        volumes:
+            - db_data:/var/lib/mysql
+        environment:
+            MYSQL _ROOT_PASSWORD: T0day.T1jan333
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: T0day.T1jan333
+        networks:
+            website_network:
+                aliases:
+                    - wordpress
+    wordpress:
+        build: .
+        container_name: wordpress
+        ports:
+            - "80:80"
+        networks:
+            website_network:
+                aliases:
+                    - wordpress
+        environment:
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_USER: wordpress
+            WOEDPRESS_PASSWORD: T0day.T1jan333
+networks:
+    website_network:
+        name: website_network
+volumes:
+    db_data:
+        driver: local
+        name: MYSQL_DATABASE
+
+    cloudflare-ddns:
+        container_name: cloudflareDNS
+        image: oznu/cloudflare-ddns
+        restart: always
+        environment:
+          PUID: 0
+          PGID: 0
+        API_KEY: ktez6xlMnDf0yaD5xGuUjgI-PV95A2Dn3tohz6wV
+        ZONE: starsgrooming.co.uk
