@@ -90,4 +90,4 @@ chmod +x /etc/cron.monthly/autoremove
 echo "#  ---  2GB swap file created | SYSTEM REBOOTING  ---  #"
  
 reboot
-# ----> Next Script | security-samba.sh
+# ----> Next Script | finish.sh
