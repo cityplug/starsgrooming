@@ -14,6 +14,7 @@ ufw allow http
 ufw allow https
 ufw allow port 4792 from 81.174.167.183
 ufw allow port 6105 from 81.174.167.183
+ufw allow port 4792
 ufw deny port 22
 
 echo
