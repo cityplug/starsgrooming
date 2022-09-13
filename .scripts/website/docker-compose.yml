@@ -39,31 +39,10 @@ services:
             website_network:
                 aliases:
                     - nginx-proxy           
-networks:
-    website_network:
-        name: website_network
-volumes:
-    db_data:
-        driver: local
-        name: MYSQL_DATABASE
-
-    cloudflare-ddns:
-        container_name: cloudflareDNS
-        image: oznu/cloudflare-ddns
-        restart: always
-        environment:
-          PUID: 0
-          PGID: 0
-        API_KEY: ktez6xlMnDf0yaD5xGuUjgI-PV95A2Dn3tohz6wV
-        ZONE: starsgrooming.co.uk
-    
-    watchtower:
-      image: containrrr/watchtower
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-      environment: 
-        - WATCHTOWER_CLEANUP=true
-        - WATCHTOWER_LABEL_ENABLE=true
-        - WATCHTOWER_INCLUDE_STOPPED=true
-        - WATCHTOWER_REVIVE_STOPPED=true
-        - WATCHTOWER_POLL_INTERVAL=604800
+    networks:
+        website_network:
+            name: website_network
+    volumes:
+        db_data:
+            driver: local
+            name: MYSQL_DATABASE

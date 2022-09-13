@@ -18,16 +18,10 @@
     reboot
 --------------------------------------------------------------------------------
     sudo su
-    cd /opt
-    apt install git -y && git clone https://github.com/cityplug/starsgrooming && chmod +x starsgrooming/.scripts/*
+    cd /opt && apt install git -y && git clone https://github.com/cityplug/starsgrooming && chmod +x starsgrooming/.scripts/*
 ------------------------------------------------------------------------------
 ### Run the following scripts
     cd starsgrooming/.scripts/ && ./start.sh
     sudo su
-    cd /opt/starsgrooming/.scripts/ && ./security-samba.sh
+    cd /opt/starsgrooming/.scripts/ && ./finish.sh
 --------------------------------------------------------------------------------
-    echo "
-    interface eth0
-    static ip_address=192.168.50.254/24
-    static routers=192.168.50.1" >> /etc/dhcpcd.conf
-------------------------------------------------------------------------------

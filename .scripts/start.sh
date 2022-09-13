@@ -21,9 +21,6 @@ systemd-udev-trigger.service systemd-journald.service \
 systemd-fsck-root.service systemd-logind.service wpa_supplicant.service \
 bluetooth.service apt-daily.service apt-daily.timer apt-daily-upgrade.timer apt-daily-upgrade.service
 
-# --- Over clcok raspberry pi & increase GPU
-sed -i '40i\over_voltage=2\narm_freq_min=900\narm_freq=1500\n' /boot/config.txt
-
 # --- Disable Bluetooth & Wifi
 echo "
 disable_splash=1
@@ -47,7 +44,8 @@ apt install lsb-release -y
 apt install fail2ban -y
 apt install ufw -y
 apt install shellinabox -y
-# --- Install Docker & Docker-Compose
+
+# --- Install Docker
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
@@ -56,14 +54,14 @@ echo \
   $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 apt update && apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-
-curl -L "https://github.com/docker/compose/releases/download/$(curl https://github.com/docker/compose/releases | grep -m1 '<a href="/docker/compose/releases/download/' | grep -o 'v[0-9:].[0-9].[0-9]')/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-chmod +x /usr/local/bin/docker-compose && apt install docker-compose -y
-
 systemctl enable docker
-docker-compose --version && docker --version
 usermod -aG docker shay
+
+# --- Install Docker-Compose
+sudo curl -L "https://github.com/docker/compose/releases/download/2.10.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+#curl -L "https://github.com/docker/compose/releases/download/$(curl https://github.com/docker/compose/releases | grep -m1 '<a href="/docker/compose/releases/download/' | grep -o 'v[0-9:].[0-9].[0-9]')/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#chmod +x /usr/local/bin/docker-compose && apt install docker-compose -y
+docker-compose --version && docker --version
 
 # --- Addons
 echo "#  ---  Running Addons  ---  #"

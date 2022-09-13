@@ -1,1 +1,1 @@
-FROM hyperiot/rpi-mysql:latest
+FROM hypriot/rpi-mysql:latest
