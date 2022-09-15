@@ -9,17 +9,18 @@ services:
      volumes:
        - wordpress_files:/var/www/html
      ports:
-       - "80:80"
+       - "80"
      restart: always
+     networks:
+       website_network:
+         aliases:
+           - wordpress
      environment:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress
        WORDPRESS_DB_PASSWORD: T0day.T1jan333
        WORDPRESS_DB_NAME: wordpress
-     networks:
-       website_network:
-         aliases:
-           - wordpress
+
    db:
      build: ./db
      container_name: db
@@ -28,15 +29,27 @@ services:
      ports:
        - "3306:3306"
      restart: always
+     networks:
+       website_network:
+         aliases:
+           - wordpress
      environment:
        MYSQL_ROOT_PASSWORD: T0day.T1jan333
        MYSQL_DATABASE: wordpress
        MYSQL_USER: wordpress
        MYSQL_PASSWORD: T0day.T1jan333
+
+   nginx:
+     build: ./nginx
+     container_name: nginx
+     ports:
+       - "80:80"
+     restart: always
      networks:
        website_network:
          aliases:
-           - wordpress
+           - nginx-proxy 
+
 volumes:
     wordpress_files:
     db_data:
