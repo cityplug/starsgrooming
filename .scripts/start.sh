@@ -44,7 +44,9 @@ apt install lsb-release -y
 apt install fail2ban -y
 apt install ufw -y
 apt install shellinabox -y
-
+apt install curl -y
+apt install gnupg -y
+apt install lsb-release -y
 # --- Install Docker
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -53,7 +55,7 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
   $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-apt update && apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+apt-get update && apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 systemctl enable docker
 usermod -aG docker shay
 
