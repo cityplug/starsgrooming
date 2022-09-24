@@ -25,3 +25,12 @@
     sudo su
     cd /opt/starsgrooming/.scripts/ && ./finish.sh
 --------------------------------------------------------------------------------
+#060E25 > Dark Blue
+#FD8845 > Orange
+#977977 > Coral
+#659FAA > Blue Gray
+
+#733509 > Chocolate
+#4E3524 > Dark Brown
+#181008 > Darkest Brown
+#c0c0c0 > silver 
